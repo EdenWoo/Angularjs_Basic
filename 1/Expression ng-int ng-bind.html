@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<!--
+The ng-init directive defines initial values for an AngularJS application.
+Normally, you will not use ng-init. You will use a controller or module instead.
+-->
+<div ng-app="" ng-init="firstName='John'">
+
+<!--AngularJS expressions are written inside double braces: {{ expression }}.
+AngularJS expressions can be written inside double braces: {{ expression }}.
+AngularJS expressions can also be written inside a directive: ng-bind="expression".
+
+-->
+<p>The name is <span ng-bind="firstName"></span></p>
+<p>The name is {{firstName}}</p>
+
+</div>
+
+</body>
+</html>

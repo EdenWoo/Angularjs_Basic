@@ -1,0 +1,45 @@
+AngularJS is a JavaScript Framework
+
+AngularJS is a JavaScript framework. It can be added to an HTML page with a <script> tag.
+
+AngularJS extends HTML attributes with Directives, and binds data to HTML with Expressions.
+
+AngularJS extends HTML with ng-directives,which are HTML attributes with an ng prefix.
+The ng-app directive   : defines an AngularJS application.
+The ng-model directive : binds the value of HTML controls (input, select, textarea) to application data.
+The ng-bind directive  : binds application data to the HTML view.
+
+AngularJS API
+
+
+https://github.com/angular/angular-seed
+种子项目,简单的项目，带有如何clone到本地的教程，部署的教程--recommended by Kevin
+
+
+https://docs.angularjs.org/tutorial/step_00
+Angualr tutorial --recommended by Kevin
+
+
+https://github.com/robertjchristian/angular-enterprise-seed
+复杂一点的项目，带有登录界面。
+
+http://arthur.gonigberg.com/2013/06/29/angularjs-role-based-auth/
+AngularJS -- Quick Role-Based Authentication登录
+
+
+https://leftshift.io/8-tips-for-angular-js-beginners/
+建议
+
+https://leftshift.io/#home
+很漂亮的网站
+
+
+
+Introduction to Angular JS学习视频
+https://www.youtube.com/watch?v=8ILQOFAgaXE&list=PLIdFBvsYFxr5uOB2Isdv983-lStE1R0rq
+
+http://blog.sundaycoding.com/blog/2014/06/20/using-lineman-dot-js-with-angularjs/
+Lineman tutorail
+JS学习视频源码
+
+http://angular-tips.com/blog/2013/08/my-workflow-with-lineman/

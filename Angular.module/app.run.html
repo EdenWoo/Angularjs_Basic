@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script>
+var myApp = angular.module('myApp', ['ngRoute']);
+
+
+myApp.config( function($routeProvider) {
+    console.log("app config");
+    $routeProvider
+    .when('/', {template: '<h3>Landing</h3>', 
+                controller:'routeCtrl',
+                resolve: {
+                  data: function() {
+                      console.log('Data resolve called');
+                  }
+                }
+             }
+     )
+    .otherwise({redirectTo: '/'});;
+});
+
+myApp.factory('aProvider', function() {
+   console.log("factory");
+});
+
+myApp.directive("test1", function() {
+    console.log("directive setup");
+    return {
+        compile: function() {console.log("directive compile");}
+    }
+});
+
+myApp.directive("test2", function() {
+    return {
+        link: function() {console.log("directive link");}
+    }
+});
+
+myApp.controller('myCtrl', function($scope) {
+    console.log("app controller");
+});
+        
+myApp.controller('routeCtrl',function($scope) {
+    console.log("route controller");
+});
+
+
+myApp.run(function() {
+    console.log("app run");
+});
+
+</script>
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+    <div test1 test2> </div>
+    <p> 
+        <a href="#/">Home</a>
+    </p>
+     <div ng-view></div>
+</div>
+
+</body>
+</html>

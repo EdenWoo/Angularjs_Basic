@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="formCtrl">
+	<form>
+	    Input controls provides data-binding by using the ng-model directive.
+	    The application does now have a property named firstname.
+		The ng-model directive binds the input controller to the rest of your application.
+		The property firstname, can be referred to in a controller:
+	    First Name: <input type="text" ng-model="firstname">
+	</form>
+
+	 <form>
+			First Name: <input type="text" ng-model="firstname">
+	</form>
+
+
+	Checkbox
+	A checkbox has the value true or false. Apply the ng-model directive to a checkbox, 
+	and use it's value in your application.
+  	<form>
+    	Check to show a header:
+   		 <input type="checkbox" ng-model="myVar">
+ 	</form>
+	<h1 ng-show="myVar">My Header</h1>
+	<h1>You entered: {{firstname}}</h1>
+
+	<div ng-switch="myVar">	
+	  	<div ng-switch-when="dogs">
+	    	<h1>Dogs</h1>
+	    	<p>Welcome to a world of dogs.</p>
+	  	</div>
+
+	  	<div ng-switch-when="tuts">
+	     	<h1>Tutorials</h1>
+	    	<p>Learn from examples.</p>
+	  	</div>
+
+	  	<div ng-switch-when="cars">
+	     	<h1>Cars</h1>
+	     	<p>Read about cars.</p>
+	  	</div>	
+	</div>
+
+	<p>The ng-switch directive hides and shows HTML sections depending on the value of the radio buttons.</p>
+
+
+
+	Radiobuttons
+Bind radio buttons to your application with the ng-model directive.
+Radio buttons with the same ng-model can have different values, but only the selected one will be used.
+	<form>
+		Pick a topic:
+		<input type="radio" ng-model="myVar" value="dogs">Dogs
+		<input type="radio" ng-model="myVar" value="tuts">Tutorials
+		<input type="radio" ng-model="myVar" value="cars">Cars
+	</form>
+
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('formCtrl', function($scope) {
+    $scope.firstname = "John";
+});
+</script>
+
+</body>
+</html>

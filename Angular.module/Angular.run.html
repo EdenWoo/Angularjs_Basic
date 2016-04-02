@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<script>
+
+// declare top-level module which depends on filters,and services
+var myApp = angular.module('myApp',
+    [   'myApp.filters',
+        'myApp.directives', // custom directives
+        'ngGrid', // angular grid
+        'ui', // angular ui
+        'ngSanitize', // for html-bind in ckeditor
+        'ui.ace', // ace code editor
+        'ui.bootstrap', // jquery ui bootstrap
+        '$strap.directives' // angular strap
+    ]);
+
+myApp.config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {}
+
+// this is run after angular is instantiated and bootstrapped
+myApp.run(function ($rootScope, $location, $http, $timeout, AuthService, RESTService) {}
+
+
+Here's the calling order:
+app.config()
+app.run()
+directive's compile functions (if they are found in the dom)
+app.controller()
+directive's link functions (again, if found)
+
+
+app.run()
+
+get executed after the injector is created and are used to kickstart the application. 
+Only instances and constants can be injected into run blocks. 
+This is to prevent further system configuration during application run time.
+
+Run blocks are the closest thing in Angular to the main method. A run block is the code which needs to run to kickstart the application. It is executed after all of the service have been configured and the injector has been created. 
+Run blocks typically contain code which is hard to unit-test, and for this reason should be declared in isolated modules, so that they can be ignored in the unit-tests.
+
+
+app config
+app run
+directive setup
+directive compile
+app controller
+directive link
+** Data resolve called **
+new route's controller
+
+
+</html>

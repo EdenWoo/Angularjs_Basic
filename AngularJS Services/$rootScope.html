@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<style type="text/css">
+
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+
+</style>
+<body>
+
+scope is a glue between view and controller per AJS documentation
+$rootScope
+- $rootScopeProvider
+- service in module ng
+Every application has a single root scope. All other scopes are descendant派生 scopes of the root scope. 
+Scopes provide separation between the model and the view, via a mechanism for watching the model for changes. 
+They also provide event emission/broadcast and subscription facility. 
+
+$rootScope.($emit/$broadcast)
+If things weren’t complicated enough, let’s throw in $rootScope as well. $rootScope is the parent of all scopes, which makes every newly created $scope a descendent! I mentioned above about how $scope is limited to direct scopes, $rootScope is how we could communicate across scopes with ease. Doing this will fit certain scenarios better than others. It’s not as simple as up or down the scopes though, unfortunately…
+
+refer to http://www.dotnet-tricks.com/Tutorial/angularjs/UVDE100914-Understanding-AngularJS-$rootScope-and-$scope.html
+for more
+
+<div ng-app="myApp" ng-controller="myCtrl"> 
+  <div ng-app="myApp">
+    <div ng-controller="myCtrl"></div>
+    <div ng-controller="myCtrl2">{{value}}</div>
+</div>
+
+Define functions in the $rootScope
+
+The $rootScope is a global, which means that anything you add here, automatically becomes available in $scope in all controller. Nice eh! To set it up, you need to do something like this (I do it in app.js)
+
+app.run(function($rootScope) {
+  $rootScope.hello = function() {
+    console.log('hello');
+  }
+});
+This should now be available in controllers
+
+function MainCtrl = function($scope) {
+  $scope.save = function() {
+    $scope.hello();
+  }
+};
+
+
+<script>
+angular.module('myApp', []).controller('myCtrl', function($scope, $rootScope) {
+  	var a = //something in the scope
+  	//put it in the root scope
+  	$rootScope.test = "TEST";
+});
+
+angular.module('myApp').controller('myCtrl2', function($scope, $rootScope) {
+ 	var b = //get var a from root scope somehow
+  	//use var b
+	$scope.value = $rootScope.test;
+	alert($scope.test);
+});
+</script>
+
+</body>
+</html>

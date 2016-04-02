@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<style>
+input.ng-invalid {
+    background-color: red;
+}
+</style>
+<!--
+The ng-model directive adds/removes the following classes, according to the status of the form field:
+ng-empty
+ng-not-empty
+ng-touched
+ng-untouched
+ng-valid
+ng-invalid
+ng-dirty
+ng-pending
+ng-pristine
+-->
+
+<body>
+
+<div ng-app="myApp" ng-controller="myCtrl">
+Name: <input ng-model="name">
+</br>
+----------------------------------------------
+<form ng-app="" name="myForm">
+    Email:
+    <p>Edit the text field and it will get/lose classes according to the status.</p>
+<p><b>Note:</b> A text field with the "required" attribute is not valid when it is empty.</p>
+    <input type="email" name="myAddress" ng-model="text" required>
+    <!--In the example above, the span will be displayed only if the expression in the ng-show attribute returns true.-->
+    <span ng-show="myForm.myAddress.$error.email">Not a valid e-mail address</span>
+</form>
+-----------------------------------------------
+<!--The ng-model directive can provide status for application data (invalid, dirty, touched, error):
+-->
+<form ng-app="" name="myForm1" ng-init="myText = 'post@myweb.com'">
+    Email:
+    <input type="email" name="myAddress" ng-model="myText" required></p>
+    <h3>Status</h3>
+    myAddress.$valid:   {{myForm1.myAddress.$valid}} </br>
+    myAddress.$dirty:   {{myForm1.myAddress.$dirty}}</br>
+    myAddress.$touched: {{myForm1.myAddress.$touched}}</br>
+</form>
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.name = "John Doe";
+});
+</script>
+
+<p>Use the ng-model directive to bind the value of the input 
+field to a property made in the controller.</p>
+
+</body>
+</html>
