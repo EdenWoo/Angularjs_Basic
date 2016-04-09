@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="gemStore">
+  <head>
+    <style>
+      .ng-invalid .ng-dirty{
+        border-color: #FA7874;
+      }
+      .ng-valid .ng-dirty{
+        border-color: #78FA89;
+      }
+    </style>    
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="angular.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </head>
+  <body ng-controller="StoreController as store">
+    <header>
+      <h1 class="text-center">Flatlander Crafted Gems</h1>
+      <h2 class="text-center">-an Angular store-</h2>
+    </header>
+    <div class="list-group">
+      <div class="list-group-item" ng-repeat="product in store.products">
+        <h3>{{product.name}} <em class="pull-right">{{product.price | currency}}</em></h3>
+        <div ng-controller="GalleryController as gallery"  ng-show="product.images.length">
+          <div class="img-wrap">
+            <img ng-src="{{product.images[gallery.current]}}" />
+          </div>
+          <ul class="img-thumbnails clearfix">
+            <li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
+              <img ng-src="{{image}}" />
+            </li>
+          </ul>
+        </div>
+        <section ng-controller="TabController as tab">
+          <ul class="nav nav-pills">
+            <li ng-class="{ active:tab.isSet(1) }">
+              <a href="" ng-click="tab.setTab(1)">Description</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(2) }">
+              <a href="" ng-click="tab.setTab(2)">Specs</a>
+            </li>
+            <li ng-class="{ active:tab.isSet(3) }">
+              <a href="" ng-click="tab.setTab(3)">Reviews</a>
+            </li>
+          </ul>
+          <div ng-show="tab.isSet(1)">
+            <h4>Description</h4>
+            <blockquote>{{product.description}}</blockquote>
+          </div>
+          <div ng-show="tab.isSet(2)">
+            <h4>Specs</h4>
+            <blockquote>Shine: {{product.shine}}</blockquote>
+          </div>
+
+          <!--  Review Tab's Content  -->
+          <div ng-show="tab.isSet(3)">
+            <!--  Product Reviews List -->
+              <h4>Reviews</h4>
+                <blockquote ng-repeat="review in product.reviews">
+                  <strong>Stars</strong>
+                  <b>starts:{{review.stars}}</b>
+                  {{review.body}}
+                  <cite>by:{{review.author}}</cite>
+                  <cite class="clearfix">-</cite>
+                </blockquote>
+
+
+                <!--  Review Form 
+                novalidate turn off html validate-->
+                <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addreview(product)" novalidate>
+
+                  <!--  Live Preview -->
+                  <blockquote ng-show="reviewCtrl.review.stars">
+                    <strong>{{reviewCtrl.review.stars}} Stars</strong>
+                    {{reviewCtrl.review.body}}
+                    <cite class="clearfix">-{{reviewCtrl.review.author}}</cite>
+                  </blockquote>
+
+                  <!--  Review Form -->
+                  <h4>Submit a Review</h4>
+                  <fieldset class="form-group">
+                    <select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
+                      <option value="">Rate the Product</option>
+                    </select>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review" required></textarea>
+                  </fieldset>
+                  <fieldset class="form-group">
+                    <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" required/>
+                  </fieldset>
+                  <fieldset class="form-group">
+                  <div>reviewForm is {{reviewForm.$valid}}</div>
+                    <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+                  </fieldset>
+              </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
